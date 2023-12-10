@@ -1,0 +1,10 @@
+/* variable */
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+:root {
+    --TERMIANL-BG-COLOR: rgb(19, 41, 5);
+    --TERMIANL-COLOR: greenyellow;
+    --TERMINAL-FF: "VT323", monospace;
+    --TERMINAL-SIZE: 500px;
+    --TERMINAL-FONT-SIZE: 2rem;
+    --TERMINAL-SHADOW: 1px 0 9px;
+}

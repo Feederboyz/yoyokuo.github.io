@@ -1,0 +1,29 @@
+/* variable */
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+:root {
+    --TERMIANL-BG-COLOR: rgb(19, 41, 5);
+    --TERMIANL-COLOR: greenyellow;
+    /* --TERMINAL-FF: "VT323", monospace; */
+    --TERMINAL-FF: Consolas, monaco, monospace;
+    --TERMINAL-FONT-SIZE: 1.3rem;
+    --TERMINAL-SHADOW: 1px 0 1.8px;
+    --TERMINAL-LINK-COLOR: #20c;
+}
+
+* {
+    /* padding: 0; */
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--TERMINAL-FF);
+    text-shadow: var(--TERMIANL-COLOR) var(--TERMINAL-SHADOW);
+    background-color: var(--TERMIANL-BG-COLOR);
+    color: var(--TERMIANL-COLOR);
+    font-size: var(--TERMINAL-FONT-SIZE);
+}
+a {
+    text-shadow: var(--TERMINAL-LINK-COLOR) var(--TERMINAL-SHADOW);
+    color: var(--TERMINAL-LINK-COLOR);
+}

@@ -1,0 +1,117 @@
+/* variable */
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+:root {
+    --TERMIANL-BG-COLOR: rgb(19, 41, 5);
+    --TERMIANL-COLOR: greenyellow;
+    --TERMINAL-FF: "VT323", monospace;
+    --TERMINAL-SIZE: 500px;
+    --TERMINAL-FONT-SIZE: 2rem;
+    --TERMINAL-SHADOW: 1px 0 9px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#terminal {
+    position: absolute;
+    width: var(--TERMINAL-SIZE);
+    height: var(--TERMINAL-SIZE);
+    background-color: var(--TERMIANL-BG-COLOR);
+    color: var(--TERMIANL-COLOR);
+    font-family: var(--TERMINAL-FF);
+    font-size: var(--TERMINAL-FONT-SIZE);
+    text-shadow: var(--TERMIANL-COLOR) var(--TERMINAL-SHADOW);
+}
+
+#context {
+    width: 100%;
+    /* word-wrap: break-word; */
+}
+
+.context-animation {
+    display: inline-block;
+}
+
+.word-div {
+    display: inline-block;
+}
+
+#monitor {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background-color: #17181c;
+    background-image: url("../image/monitor.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+#pc {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background-color: red;
+    background-image: url("../image/pc.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#keyboard {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    background-color: brown;
+    background-image: url("../image/keyboard.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#keyboard button {
+    width: 100px;
+    height: 30px;
+}
+
+#pc button {
+    width: 50px;
+    height: 50px;
+}
+
+.cursor {
+    width: 3px;
+    height: 1em;
+    animation: blink 1s step-start 0s infinite;
+}
+
+@keyframes blink {
+    from,
+    to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: var(--TERMIANL-COLOR);
+    }
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 2fr 1fr;
+}
+
+@media all and (min-width: 1280px) {
+}
+@media all and (min-width: 1024px) and (max-width: 1280px) {
+}
+@media all and (min-width: 768px) and (max-width: 1024px) {
+}
+@media all and (min-width: 480px) and (max-width: 768px) {
+}
+@media all and (max-width: 480px) {
+}
