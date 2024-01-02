@@ -5,22 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>myweb</title>
         <link rel="stylesheet" href="./css/index.css" />
+        <link
+            rel="preload"
+            href="../image/agent3_46x70_scaled_4x.png"
+            as="image"
+        />
+        <link
+            rel="preload"
+            href="../image/agent3_46x70_scaled_6x.png"
+            as="image"
+        />
     </head>
     <body>
-        <div id="monitor">
-            <section id="terminal">
-                <div id="context">
-                    <span id="prompt">Feederboy@DESKTOP:~$</span>
-                    <span class="cursor">&nbsp;</span>
-                </div>
-            </section>
-        </div>
         <div id="pc">
-            <button id="powerButton">O</button>
-        </div>
-        <div id="keyboard">
-            <button id="yesButton">Yes</button>
-            <button id="noButton">No</button>
+            <section id="terminal">
+                <span id="prompt">Feederboy@DESKTOP:~$</span>
+                <span class="cursor">&nbsp;</span>
+            </section>
+            <button class="yn-button" id="yes-button">Yes</button>
+            <button class="yn-button" id="no-button">No</button>
+            <button class="power-button" id="power-button">O</button>
+            <div id="agent" , class="agent1"></div>
         </div>
         <script src="./script/script.js"></script>
     </body>

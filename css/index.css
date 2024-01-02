@@ -1,12 +1,52 @@
+/* --------------------------------------------------------------------------- */
 /* variable */
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 :root {
-    --TERMIANL-BG-COLOR: rgb(19, 41, 5);
-    --TERMIANL-COLOR: greenyellow;
-    --TERMINAL-FF: "VT323", monospace;
-    --TERMINAL-SIZE: 500px;
+    /* ---------------------------------- */
+    /* BACKGROUND */
+    --BG-COLOR: #3c342e;
+    --RATIO: 6;
+
+    /* ---------------------------------- */
+    /* PC */
+    /* --PC-IMG-PATH: url("../image/256x217_scaled_6x.png"); */
+    --PC-HEIGHT: calc(217px * var(--RATIO));
+    --PC-WIDTH: calc(256px * var(--RATIO));
+
+    /* ---------------------------------- */
+    /* TERMINAL */
+    --TERMINAL-WIDTH: calc(102px * var(--RATIO));
+    --TERMINAL-HEIGHT: calc(58px * var(--RATIO));
+    --TERMINAL-TOP: calc(12px * var(--RATIO));
+    --TERMINAL-LEFT: calc(76px * var(--RATIO));
+
+    --TERMINAL-BG-COLOR: #132905;
+    --TERMINAL-COLOR: greenyellow;
+
     --TERMINAL-FONT-SIZE: 2rem;
     --TERMINAL-SHADOW: 1px 0 9px;
+    --TERMINAL-FF: "VT323", monospace;
+
+    /* ---------------------------------- */
+    /* AGENT */
+    --AGNET-WIDTH: calc(46px * var(--RATIO));
+    --AGNET-HEIGHT: calc(70px * var(--RATIO));
+    --AGNET-TOP: calc(85px * var(--RATIO));
+    --AGNET-LEFT: calc(176px * var(--RATIO));
+
+    /* ---------------------------------- */
+    /* BUTTON */
+    --PWR-BTN-WIDTH: calc(7px * var(--RATIO));
+    --PWR-BTN-HEIGHT: calc(7px * var(--RATIO));
+    --PWR-BTN-TOP: calc(109px * var(--RATIO));
+    --PWR-BTN-LEFT: calc(76px * var(--RATIO));
+
+    --YN-BTN-WIDTH: calc(44px * var(--RATIO));
+    --YN-BTN-HEIGHT: calc(14px * var(--RATIO));
+    --YES-BTN-TOP: calc(120px * var(--RATIO));
+    --YES-BTN-LEFT: calc(76px * var(--RATIO));
+    --NO-BTN-TOP: calc(120px * var(--RATIO));
+    --NO-BTN-LEFT: calc(128px * var(--RATIO));
 }
 
 * {
@@ -15,67 +55,40 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: start center;
+    background-color: var(--BG-COLOR);
+}
+
+#pc {
+    width: var(--PC-WIDTH);
+    height: var(--PC-HEIGHT);
+    position: relative;
+    background-image: var(--PC-IMG-PATH);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* --------------------------------------------------------------------------- */
+/* termianl */
 #terminal {
+    top: var(--TERMINAL-TOP);
+    left: var(--TERMINAL-LEFT);
     position: absolute;
-    width: var(--TERMINAL-SIZE);
-    height: var(--TERMINAL-SIZE);
-    background-color: var(--TERMIANL-BG-COLOR);
-    color: var(--TERMIANL-COLOR);
+    width: var(--TERMINAL-WIDTH);
+    height: var(--TERMINAL-HEIGHT);
+    background-color: var(--TERMINAL-BG-COLOR);
+    color: var(--TERMINAL-COLOR);
     font-family: var(--TERMINAL-FF);
     font-size: var(--TERMINAL-FONT-SIZE);
-    text-shadow: var(--TERMIANL-COLOR) var(--TERMINAL-SHADOW);
-}
-
-#context {
-    width: 100%;
-    /* word-wrap: break-word; */
-}
-
-.context-animation {
-    display: inline-block;
-}
-
-.word-div {
-    display: inline-block;
-}
-
-#monitor {
-    grid-column: 1/2;
-    grid-row: 1/2;
-    background-color: #17181c;
-    background-image: url("../image/monitor.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-#pc {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    background-color: red;
-    background-image: url("../image/pc.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-#keyboard {
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
-    background-color: brown;
-    background-image: url("../image/keyboard.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-#keyboard button {
-    width: 100px;
-    height: 30px;
-}
-
-#pc button {
-    width: 50px;
-    height: 50px;
+    text-shadow: var(--TERMINAL-COLOR) var(--TERMINAL-SHADOW);
 }
 
 .cursor {
@@ -90,28 +103,127 @@
         background-color: transparent;
     }
     50% {
-        background-color: var(--TERMIANL-COLOR);
+        background-color: var(--TERMINAL-COLOR);
     }
 }
-html {
-    width: 100%;
-    height: 100%;
-}
-body {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 2fr 1fr;
+
+.word-div {
+    display: inline-block;
 }
 
-@media all and (min-width: 1280px) {
+/* --------------------------------------------------------------------------- */
+/* button */
+.yn-button {
+    background-color: transparent;
+    position: absolute;
+    text-indent: -9999px;
+    overflow: hidden;
+    border: none;
+    width: var(--YN-BTN-WIDTH);
+    height: var(--YN-BTN-HEIGHT);
+    animation: highlight 2s step-start 0s infinite;
 }
-@media all and (min-width: 1024px) and (max-width: 1280px) {
+
+#yes-button {
+    top: var(--YES-BTN-TOP);
+    left: var(--YES-BTN-LEFT);
 }
-@media all and (min-width: 768px) and (max-width: 1024px) {
+
+#no-button {
+    top: var(--NO-BTN-TOP);
+    left: var(--NO-BTN-LEFT);
 }
-@media all and (min-width: 480px) and (max-width: 768px) {
+
+.power-button {
+    background-color: transparent;
+    position: absolute;
+    text-indent: -9999px;
+    overflow: hidden;
+    border: none;
+    width: var(--PWR-BTN-WIDTH);
+    height: var(--PWR-BTN-HEIGHT);
+    /* animation: highlight 2s step-start 0s infinite; */
 }
-@media all and (max-width: 480px) {
+
+#power-button {
+    top: var(--PWR-BTN-TOP);
+    left: var(--PWR-BTN-LEFT);
+}
+
+@keyframes highlight {
+    from,
+    to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: hsla(0, 0%, 100%, 0.247);
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+/* agent */
+#agent {
+    top: var(--AGNET-TOP);
+    left: var(--AGNET-LEFT);
+    position: absolute;
+    width: var(--AGNET-WIDTH);
+    height: var(--AGNET-HEIGHT);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: var(--AGNET-IMG-SIZE) var(--AGNET-IMG-SIZE);
+}
+.agent1 {
+    background-image: var(--AGNET-IMG-PATH-1);
+}
+.agent2 {
+    background-image: var(--AGNET-IMG-PATH-2);
+}
+.agent3 {
+    background-image: var(--AGNET-IMG-PATH-3);
+}
+.agent4 {
+    background-image: var(--AGNET-IMG-PATH-4);
+}
+.preload-img {
+    display: none;
+    url("../image/256x217_scaled_6x.png"),
+    url("../image/256x217_scaled_4x.png"),
+    url("../image/agent1_46x70_scaled_6x.png"),
+    url("../image/agent2_46x70_scaled_6x.png"),
+    url("../image/agent1_46x70_scaled_4x.png"),
+    url("../image/agent2_46x70_scaled_4x.png"),
+    url("../image/agent3_46x70_scaled_4x.png"),
+    url("../image/agent3_46x70_scaled_6x.png");
+}
+/* 120x147 */
+@media all and (min-height: calc(217px * 5)) {
+    :root {
+        --RATIO: 5;
+        --PC-IMG-PATH: url("../image/256x217_scaled_5x.png");
+        --AGNET-IMG-PATH-1: url("../image/agent1_46x70_scaled_5x.png");
+        --AGNET-IMG-PATH-3: url("../image/agent2_46x70_scaled_5x.png");
+        --AGNET-IMG-PATH-3: url("../image/agent3_46x70_scaled_5x.png");
+        --TERMINAL-FONT-SIZE: 2rem;
+    }
+}
+@media all and (min-height: calc(217px * 4)) and (max-height: calc(217px * 5)) {
+    :root {
+        --RATIO: 4;
+        --PC-IMG-PATH: url("../image/256x217_scaled_4x.png");
+        --AGNET-IMG-PATH-1: url("../image/agent1_46x70_scaled_4x.png");
+        --AGNET-IMG-PATH-2: url("../image/agent2_46x70_scaled_4x.png");
+        --AGNET-IMG-PATH-3: url("../image/agent3_46x70_scaled_4x.png");
+        --TERMINAL-FONT-SIZE: 1.7rem;
+    }
+}
+
+@media all and (max-height: calc(217px * 4)) {
+    :root {
+        --RATIO: 3;
+        --PC-IMG-PATH: url("../image/256x217_scaled_3x.png");
+        --AGNET-IMG-PATH-1: url("../image/agent1_46x70_scaled_3x.png");
+        --AGNET-IMG-PATH-2: url("../image/agent2_46x70_scaled_3x.png");
+        --AGNET-IMG-PATH-3: url("../image/agent3_46x70_scaled_3x.png");
+        --TERMINAL-FONT-SIZE: 1.5rem;
+    }
 }

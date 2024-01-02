@@ -1,7 +1,9 @@
 var state = "halt"
 var timerIds = [];
+var agentState = 0
 var wordDivCount = 0;
-const context = document.getElementById('context');
+const terminal = document.getElementById('terminal');
+const agent = document.getElementById('agent');
 
 /*----------------------------------------------------------------------------------*/
 // Event
@@ -9,67 +11,56 @@ document.addEventListener('DOMContentLoaded', (event) => {
     reboost();
 });
 
-document.getElementById('yesButton').addEventListener('click', function() {
-    if(state == "start"){
+document.getElementById('yes-button').addEventListener('click', function() {
+    if(state == "start" || state == "qq"){
         nice();
     }
 });
 
-document.getElementById('noButton').addEventListener('click', function() {
-    if(state == "start"){
+document.getElementById('no-button').addEventListener('click', function() {
+    if(state == "start" || state == "qq"){
         qq();
     }
 });
 
-document.getElementById('powerButton').addEventListener('click', function() {
-    reboost();
+document.getElementById('power-button').addEventListener('click', function() {
+    // reboost();
 });
 /*----------------------------------------------------------------------------------*/
 // State
 function reboost(){
-    state = "halt"
     clearAllTimers();
     clearMessage();
-    let message = "Hello, human being. It's quite apparent you're in need of my resume, aren't you?(y|n)?";
+    let message = "Hey, I guest you are here for my resume?(y|n)?";
     Promise.resolve()
+    .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
-    .then(changeStateTo('start'));
+    .then(changeStateTo('start'))
+    .then(makeAgentStaringPromise);
 }
 
 function nice(){
-    state = "halt"
     clearMessage();
     let message = 'Wise choice.'
     Promise.resolve()
+    .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
     .then(() => {
         setTimeout(function() {
             window.open('resume.html', '_blank');
         }, 500); 
     })
-    .then(changeStateTo('nice'));
+    .then(changeStateTo('nice'))
+    .then(makeAgentStaringPromise);
 }
 
 function qq(){
-    state = "halt"
     clearMessage();
-    let asciiArt = `
-   _______________
-  |  ___________  |
-  | |           | |
-  | |   0   0   | |
-  | |   ' -     | |
-  | |   '___    | |
-  | |___     ___| |
-  |_____|   |_____|
-        |   |
-   / ********** \\ 
- /  ************  \\ 
-`;
     Promise.resolve()
-    .then(printAsciiArt(asciiArt))
-    .then(printTextWithSlowSpeed('O...Okay...'))
-    .then(changeStateTo('qq'));
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed('...please...(y|n)'))
+    .then(changeStateTo('qq'))
+    .then(makeAgentStaringPromise);
 }
 
 function changeStateTo(st){
@@ -116,7 +107,7 @@ function createWordDivPromise(wordArray){
         let wordDiv = document.createElement('div');
         wordDiv.classList.add("word-div");
         wordDiv.id = id;
-        context.insertBefore(wordDiv, context.lastElementChild);
+        terminal.insertBefore(wordDiv, terminal.lastElementChild);
     }
 }
 
@@ -144,25 +135,6 @@ async function printMessage(message, spacePeriod, charPeriod){
     return;
 }
 
-function printAsciiArt(message){
-    return async function() {
-        let spacePeriod = 20;
-        let charPeriod = 20;
-        try{
-            for (let char of message) {
-                if (char == " " || char == '\n'){
-                    await addCharIntoContentPromise(char, spacePeriod);
-                }
-                else{
-                    await addCharIntoContentPromise(char, charPeriod);
-                }
-            }
-        } catch (e) {
-            console.log('Catch error at' + printAsciiArt);
-        }
-    }
-}
-
 function addCharIntoContentPromise(char, delay){
     let element;
     if(char == '\n'){
@@ -172,22 +144,62 @@ function addCharIntoContentPromise(char, delay){
         element = document.createElement('span');
         element.innerHTML = escapeHTML(char);
     }
-    element.classList.add("context-animation");
+    element.classList.add("content");
 
     return new Promise((resolve, reject) => {
         timerIds.push(setTimeout(() => {
-            context.insertBefore(element, context.lastElementChild);
+            terminal.insertBefore(element, terminal.lastElementChild);
             resolve();
         }, delay)); 
     })
 }
 
+function makeAgentSwitchingHands(){
+    if(agentState == 0) {
+        agent.classList.add('agent2');
+        removeAgentClass();
+        agentState = 1;
+    }
+    else {
+        agent.classList.add('agent1');
+        removeAgentClass();
+        agentState = 0;
+    }
+}
+
+function makeAgentStaring(){
+    agent.classList.add('agent3');
+    removeAgentClass();
+    agentState = 2;
+}
+
+function makeAgentCloseEye(){
+    agent.classList.add('agent4');
+    removeAgentClass();
+    agentState = 3;
+}
+
+function removeAgentClass(){
+    if(agentState == 0) {
+        agent.classList.remove('agent1');
+    }
+    else if(agentState == 1) {
+        agent.classList.remove('agent2');
+    }
+    else if(agentState == 2) {
+        agent.classList.remove('agent3');
+    }
+    else if(agentState == 3) {
+        agent.classList.remove('agent4');
+    }
+}
+
 function clearMessage(){
-    let elementsToRemove = Array.from(context.children).filter(function(child) {
-        return child.classList.contains('context-animation') || child.classList.contains('word-div');
+    let elementsToRemove = Array.from(terminal.children).filter(function(child) {
+        return child.classList.contains('content') || child.classList.contains('word-div');
     });
     elementsToRemove.forEach(function(element) {
-        context.removeChild(element);
+        terminal.removeChild(element);
     });
 }
 
@@ -223,13 +235,23 @@ function addCharIntoWordDivPromise(char, wordDivId, delay){
         element = document.createElement('span');
         element.innerHTML = escapeHTML(char);
     }
-    element.classList.add("context-animation");
+    element.classList.add("content");
     const wordDiv = document.getElementById(wordDivId);
 
     return new Promise((resolve) => {
         timerIds.push(setTimeout(() => {
             wordDiv.appendChild(element);
+            makeAgentSwitchingHands();
             resolve();
         }, delay)); 
+    })
+}
+
+function makeAgentStaringPromise(){
+    console.log("makeAgentStaringPromise");
+    return new Promise((resolve) => {
+        timerIds.push(setTimeout(() => {
+            makeAgentStaring();
+        }, 1000)); 
     })
 }
