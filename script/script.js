@@ -249,7 +249,6 @@ function addCharIntoWordDivPromise(char, wordDivId, delay){
 }
 
 function makeAgentStaringPromise(){
-    console.log("makeAgentStaringPromise");
     return new Promise((resolve) => {
         timerIds.push(setTimeout(() => {
             makeAgentStaring();
