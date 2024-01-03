@@ -48,7 +48,7 @@ function nice(){
     .then(() => {
         setTimeout(function() {
             // window.open('resume.html', '_blank');
-            window.location.href = 'resume.html';
+            location.href = 'resume.html';
         }, 500); 
     })
     .then(changeStateTo('nice'))
