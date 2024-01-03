@@ -184,24 +184,13 @@ body {
 .agent4 {
     background-image: var(--AGNET-IMG-PATH-4);
 }
-.preload-img {
-    display: none;
-    url("../image/256x217_scaled_6x.png"),
-    url("../image/256x217_scaled_4x.png"),
-    url("../image/agent1_46x70_scaled_6x.png"),
-    url("../image/agent2_46x70_scaled_6x.png"),
-    url("../image/agent1_46x70_scaled_4x.png"),
-    url("../image/agent2_46x70_scaled_4x.png"),
-    url("../image/agent3_46x70_scaled_4x.png"),
-    url("../image/agent3_46x70_scaled_6x.png");
-}
 /* 120x147 */
 @media all and (min-height: calc(217px * 5)) {
     :root {
         --RATIO: 5;
         --PC-IMG-PATH: url("../image/256x217_scaled_5x.png");
         --AGNET-IMG-PATH-1: url("../image/agent1_46x70_scaled_5x.png");
-        --AGNET-IMG-PATH-3: url("../image/agent2_46x70_scaled_5x.png");
+        --AGNET-IMG-PATH-2: url("../image/agent2_46x70_scaled_5x.png");
         --AGNET-IMG-PATH-3: url("../image/agent3_46x70_scaled_5x.png");
         --TERMINAL-FONT-SIZE: 2rem;
     }
