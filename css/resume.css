@@ -5,7 +5,6 @@
     --TERMIANL-COLOR: greenyellow;
     /* --TERMINAL-FF: "VT323", monospace; */
     --TERMINAL-FF: Consolas, monaco, monospace;
-    --TERMINAL-FONT-SIZE: 1.3rem;
     --TERMINAL-SHADOW: 1px 0 1.8px;
     --TERMINAL-LINK-COLOR: #20c;
 }
@@ -26,4 +25,27 @@ body {
 a {
     text-shadow: var(--TERMINAL-LINK-COLOR) var(--TERMINAL-SHADOW);
     color: var(--TERMINAL-LINK-COLOR);
+}
+@media all and (min-width: 1024px) {
+    :root {
+        --TERMINAL-FONT-SIZE: 1.3rem;
+    }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    :root {
+        --TERMINAL-FONT-SIZE: 1rem;
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+    :root {
+        --TERMINAL-FONT-SIZE: 1rem;
+    }
+}
+
+@media all and (max-width: 480px) {
+    :root {
+        --TERMINAL-FONT-SIZE: 0.8rem;
+    }
 }
