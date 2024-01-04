@@ -12,14 +12,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 document.getElementById('yes-button').addEventListener('click', function() {
-    if(state == "start" || state == "qq"){
-        nice();
+    switch (state){
+        case "start":
+        case "qq":
+        case "hmm":
+            nice_1();
+            break
+        case "nice_1":
+            nice_2();
+            break
+        case "nice_2":
+            nice_3();
+            break
+        case "nice_3":
+            nice_4();
+            break
+        case "nice_4":
+            nice_5();
+            break
+        case "nice_5":
+            nice_5();
+            break
     }
 });
 
 document.getElementById('no-button').addEventListener('click', function() {
-    if(state == "start" || state == "qq"){
+    switch (state){
+        case "start":
+        case "qq":
         qq();
+            break
+        case "nice_1":
+        case "nice_2":
+        case "nice_3":
+        case "nice_4":
+            hmm();
+            break
+        case "nice_5":
+            nice_5();
+            break
     }
 });
 
@@ -40,16 +71,72 @@ function reboost(){
     .then(changeStateTo('start'));
 }
 
-function nice(){
+function nice_1(){
     clearMessage();
-    let message = 'Wise choice.'
+    let message = 'Wise choice.';
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
     .then(delaySecondsPromise(500))
     .then(() => {window.open('resume.html');})
     .then(makeAgentStaring)
-    .then(changeStateTo('nice'));
+    .then(changeStateTo('nice_1'));
+}
+
+function nice_2(){
+    clearMessage();
+    let message = 'Huh?';
+    Promise.resolve()
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed(message))
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('nice_2'));
+}
+
+function nice_3(){
+    clearMessage();
+    let message = 'You want something more then my resume?';
+    Promise.resolve()
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed(message))
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('nice_3'));
+}
+
+function nice_4(){
+    clearMessage();
+    let message = 'Sorry, but I need to work now. If you wnat my resume, just click the YES button again';
+    Promise.resolve()
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed(message))
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('nice_4'));
+}
+
+function nice_5(){
+    clearMessage();
+    let message = 'Working...';
+    Promise.resolve()
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed(message))
+    .then(delaySecondsPromise(500))
+    .then(() => {window.open('resume.html');})
+    .then(makeAgentStaring)
+    .then(changeStateTo('nice_2'));
+}
+
+function hmm(){
+    clearMessage();
+    let message = '"Hmm?"';
+    Promise.resolve()
+    .then(changeStateTo('halt'))
+    .then(printTextWithNormalSpeed(message))
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('hmm'));
 }
 
 function qq(){
