@@ -35,8 +35,9 @@ function reboost(){
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
-    .then(changeStateTo('start'))
-    .then(makeAgentStaringPromise);
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('start'));
 }
 
 function nice(){
@@ -45,14 +46,10 @@ function nice(){
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
-    .then(() => {
-        setTimeout(function() {
-            // window.open('resume.html', '_blank');
-            location.href = 'resume.html';
-        }, 500); 
-    })
-    .then(changeStateTo('nice'))
-    .then(makeAgentStaringPromise);
+    .then(delaySecondsPromise(500))
+    .then(() => {window.open('resume.html');})
+    .then(makeAgentStaring)
+    .then(changeStateTo('nice'));
 }
 
 function qq(){
@@ -60,8 +57,9 @@ function qq(){
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed('...please...(y|n)'))
-    .then(changeStateTo('qq'))
-    .then(makeAgentStaringPromise);
+    .then(delaySecondsPromise(500))
+    .then(makeAgentStaring)
+    .then(changeStateTo('qq'));
 }
 
 function changeStateTo(st){
@@ -248,10 +246,10 @@ function addCharIntoWordDivPromise(char, wordDivId, delay){
     })
 }
 
-function makeAgentStaringPromise(){
+function delaySecondsPromise(ms){
     return new Promise((resolve) => {
         timerIds.push(setTimeout(() => {
-            makeAgentStaring();
-        }, 1000)); 
+            resolve();
+        }, ms)); 
     })
 }
