@@ -40,12 +40,13 @@ document.getElementById('no-button').addEventListener('click', function() {
     switch (state){
         case "start":
         case "qq":
-        qq();
+            qq();
             break
         case "nice_1":
         case "nice_2":
         case "nice_3":
         case "nice_4":
+        case "hmm":
             hmm();
             break
         case "nice_5":
@@ -130,7 +131,7 @@ function nice_5(){
 
 function hmm(){
     clearMessage();
-    let message = '"Hmm?"';
+    let message = 'Hmm?';
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
