@@ -108,7 +108,7 @@ function nice_3(){
 
 function nice_4(){
     clearMessage();
-    let message = 'Sorry, but I need to work now. If you wnat my resume, just click the YES button again';
+    let message = 'Sorry, but I need to work now. If you wnat my resume, just click the YES button again.';
     Promise.resolve()
     .then(changeStateTo('halt'))
     .then(printTextWithNormalSpeed(message))
@@ -126,7 +126,7 @@ function nice_5(){
     .then(delaySecondsPromise(500))
     .then(() => {window.open('resume.html');})
     .then(makeAgentStaring)
-    .then(changeStateTo('nice_2'));
+    .then(changeStateTo('nice_5'));
 }
 
 function hmm(){
